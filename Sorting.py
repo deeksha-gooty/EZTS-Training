@@ -68,7 +68,7 @@ if __name__=="__main__":
     quick_sort(l,low,high)
     print(f"Sorted Array: {l}")
 
-#Merge Sort
+#Merge Sort Method 1
 
 def merge(l,low,mid,high):
     left=l[low:mid+1]
@@ -112,3 +112,39 @@ if __name__=="__main__":
     print(low,high)
     merge_sort(l,low,high)
     print(f"Sorted Array: {l}")
+
+#Merge Sort Method 2
+
+def merge(left,right):
+    i=j=0
+    temp=[]
+    while i<len(left) and j<len(right):
+        if left[i]<right[j]:
+            temp.append(left[i])
+            i+=1
+        else:
+            temp.append(right[j])
+            j+=1  
+    while i<len(left):
+        temp.append(left[i])
+        i+=1        
+    while j<len(right):
+        temp.append(right[j])
+        j+=1
+
+    return temp
+
+def mergesort(l):
+    if len(l) <= 1:
+        return l
+    mid = len(l)//2
+    left=l[:mid] 
+    right=l[mid:]
+    left_sorted = mergesort(left)
+    right_sorted = mergesort(right)
+    return merge(left_sorted,right_sorted)
+
+if __name__=="__main__":
+    l=list(map(int,input().split()))
+    sorted=mergesort(l)
+    print(f"Sorted Arrar is {sorted}")
